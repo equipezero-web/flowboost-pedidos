@@ -1,0 +1,17 @@
+{
+  "name": "FlowBoost",
+  "short_name": "FlowBoost",
+  "description": "Sistema de pedidos FlowBoost",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#050a12",
+  "theme_color": "#07111f",
+  "icons": [
+    {
+      "src": "assets/flowboost-logo.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
