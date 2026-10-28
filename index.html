@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="FlowBoost — painel tecnológico para pedidos de seguidores.">
+  <title>FlowBoost — Pedidos de Seguidores</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+  <div class="orb orb-c"></div>
+
+  <div class="floating-icons" aria-hidden="true">
+    <span class="floating f1">◎</span>
+    <span class="floating f2">♡</span>
+    <span class="floating f3">↗</span>
+    <span class="floating f4">✦</span>
+  </div>
+
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="FlowBoost">
+        <span class="brand-mark">↗</span>
+        <span>FlowBoost<small>Social Orders</small></span>
+      </a>
+      <div class="nav-actions">
+        <span class="online"><i></i> Sistema online</span>
+        <a class="btn btn-ghost" href="#pedido">Novo pedido</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero" id="inicio">
+      <div class="hero-copy">
+        <span class="eyebrow"><i></i> Painel de pedidos inteligente</span>
+        <h1>Seu pedido.<br><em>Rápido, simples e organizado.</em></h1>
+        <p>Escolha um pacote, informe o perfil do Instagram e gere a solicitação em poucos segundos. O pedido é validado no servidor e armazenado com segurança no Supabase.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#pedido">Criar pedido agora <span>→</span></a>
+          <a class="btn btn-ghost" href="#precos">Ver preços</a>
+        </div>
+        <div class="stats">
+          <div><strong>7</strong><span>pacotes</span></div>
+          <div><strong>100</strong><span>mínimo</span></div>
+          <div><strong>24h</strong><span>painel disponível</span></div>
+        </div>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="dashboard-head">
+          <div class="account">
+            <div class="avatar">◎</div>
+            <div><strong>Painel em tempo real</strong><span>Visão geral do pedido</span></div>
+          </div>
+          <span class="badge-success">● ONLINE</span>
+        </div>
+        <div class="dashboard-screen">
+          <span class="section-label">RESUMO</span>
+          <div class="metrics">
+            <div class="metric"><span>Quantidade</span><strong id="heroQty">1.000</strong></div>
+            <div class="metric"><span>Total</span><strong class="green" id="heroPrice">R$ 19,90</strong></div>
+          </div>
+          <div class="chart" aria-hidden="true">
+            <svg viewBox="0 0 600 120" preserveAspectRatio="none">
+              <defs><linearGradient id="chartFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#58c4ff" stop-opacity=".35"/><stop offset="1" stop-color="#58c4ff" stop-opacity="0"/></linearGradient></defs>
+              <polygon points="0,96 70,88 135,92 205,72 275,78 345,54 410,61 485,37 550,43 600,20 600,120 0,120" fill="url(#chartFade)"/>
+              <polyline points="0,96 70,88 135,92 205,72 275,78 345,54 410,61 485,37 550,43 600,20" fill="none" stroke="#58c4ff" stroke-width="3"/>
+            </svg>
+          </div>
+          <div class="status-box"><div><span>STATUS</span><strong>Pronto para solicitar</strong></div><b>SEGURO</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section" id="precos">
+      <div class="section-heading">
+        <span class="section-label">TABELA DE VALORES</span>
+        <h2>Escolha o pacote ideal.</h2>
+        <p>Todos os valores são validados novamente no servidor no momento do pedido.</p>
+      </div>
+      <div class="packages" id="packages">
+        <button class="package" data-qty="100"><span>Inicial</span><strong>100</strong><b>R$ 4,00</b><small>Pacote de entrada</small></button>
+        <button class="package" data-qty="250"><span>Essencial</span><strong>250</strong><b>R$ 7,00</b><small>Boa opção para começar</small></button>
+        <button class="package" data-qty="500"><span>Básico</span><strong>500</strong><b>R$ 12,00</b><small>Pacote intermediário</small></button>
+        <button class="package featured" data-qty="1000"><i>MAIS ESCOLHIDO</i><span>Popular</span><strong>1.000</strong><b>R$ 19,90</b><small>Ótimo equilíbrio</small></button>
+        <button class="package" data-qty="2500"><span>Avançado</span><strong>2.500</strong><b>R$ 44,90</b><small>Perfil em crescimento</small></button>
+        <button class="package" data-qty="5000"><span>Pro</span><strong>5.000</strong><b>R$ 74,90</b><small>Maior alcance</small></button>
+        <button class="package" data-qty="10000"><span>Máximo</span><strong>10.000</strong><b>R$ 129,90</b><small>Maior pacote disponível</small></button>
+      </div>
+    </section>
+
+    <section class="container section" id="pedido">
+      <div class="section-heading">
+        <span class="section-label">NOVO PEDIDO</span>
+        <h2>Configure sua solicitação.</h2>
+        <p>Preencha os dados, revise o resumo e confirme. O código é gerado somente depois que o Supabase salvar o pedido.</p>
+      </div>
+
+      <div class="order-layout">
+        <form class="panel" id="orderForm" novalidate>
+          <div class="panel-title"><div><h3>Dados do pedido</h3><p>Informe o perfil e escolha um dos pacotes oficiais.</p></div><span class="secure-chip">✓ Protegido</span></div>
+
+          <div class="form-grid">
+            <label><span>Usuário do Instagram</span><div class="input-prefix"><i>@</i><input id="username" name="username" autocomplete="off" maxlength="30" placeholder="seuusuario"></div></label>
+            <label><span>Link do perfil</span><input id="profileUrl" name="profileUrl" type="url" autocomplete="off" placeholder="https://instagram.com/seuusuario"></label>
+          </div>
+
+          <label class="field-block"><span>Pacote de seguidores</span>
+            <select id="quantity" name="quantity">
+              <option value="100">100 seguidores — R$ 4,00</option>
+              <option value="250">250 seguidores — R$ 7,00</option>
+              <option value="500">500 seguidores — R$ 12,00</option>
+              <option value="1000" selected>1.000 seguidores — R$ 19,90</option>
+              <option value="2500">2.500 seguidores — R$ 44,90</option>
+              <option value="5000">5.000 seguidores — R$ 74,90</option>
+              <option value="10000">10.000 seguidores — R$ 129,90</option>
+            </select>
+          </label>
+
+          <div class="selection-box"><div><span>QUANTIDADE</span><strong id="qtyDisplay">1.000</strong></div><div><span>PACOTE</span><strong id="packagePrice">R$ 19,90</strong></div></div>
+          <p class="legal-note">Use o sistema apenas para perfis próprios ou autorizados e respeite as regras da plataforma. Nunca informe senha do Instagram.</p>
+        </form>
+
+        <aside class="panel summary-panel">
+          <h3>Resumo do pedido</h3>
+          <p>Confira as informações antes de confirmar.</p>
+          <div class="summary-list">
+            <div><span>Serviço</span><strong>Seguidores Instagram</strong></div>
+            <div><span>Quantidade</span><strong id="sumQty">1.000</strong></div>
+            <div><span>Pacote</span><strong id="sumPackage">1.000 seguidores</strong></div>
+            <div class="summary-total"><span>Total</span><strong id="totalPrice">R$ 19,90</strong></div>
+          </div>
+          <button class="btn btn-primary full" type="submit" form="orderForm" id="submitOrder">Gerar pedido <span>→</span></button>
+          <a class="btn btn-whatsapp full hidden" id="whatsappButton" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
+          <div class="how-it-works">
+            <div><b>1</b><span><strong>Informe o perfil</strong><small>Digite o @ ou o link oficial.</small></span></div>
+            <div><b>2</b><span><strong>Escolha o pacote</strong><small>O preço é validado no servidor.</small></span></div>
+            <div><b>3</b><span><strong>Receba seu código</strong><small>O pedido fica salvo no banco.</small></span></div>
+          </div>
+        </aside>
+      </div>
+
+      <section class="panel recent-panel">
+        <div class="recent-head"><div><h3>Pedidos recentes</h3><p>Cópia local dos últimos pedidos gerados neste navegador.</p></div><button class="btn btn-ghost small" id="clearOrders" type="button">Limpar</button></div>
+        <div id="historyList"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer><div class="container footer"><span>© 2026 FlowBoost</span><span>Frontend + Supabase Edge Function + PostgreSQL</span></div></footer>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="success-icon">✓</div>
+      <span class="section-label">PEDIDO SALVO</span>
+      <h3>Solicitação criada com sucesso.</h3>
+      <p>Guarde o código abaixo. Você também pode enviar o resumo diretamente pelo WhatsApp.</p>
+      <div class="order-code" id="orderCode">FB-000000000000</div>
+      <div class="modal-details" id="modalDetails"></div>
+      <div class="modal-actions"><button class="btn btn-ghost" id="copyOrder" type="button">Copiar resumo</button><button class="btn btn-primary" id="closeModal" type="button">Concluir</button></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>
