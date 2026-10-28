@@ -1,6 +1,6 @@
 # FlowBoost — Sistema de Pedidos
 
-Sistema web para registrar pedidos de pacotes de seguidores, com frontend responsivo, envio do resumo para WhatsApp e persistência real no Supabase.
+Sistema web responsivo para registrar pedidos de pacotes de seguidores, gerar código de acompanhamento, preparar o resumo para WhatsApp e armazenar os pedidos no Supabase.
 
 ## Pacotes
 
@@ -17,28 +17,49 @@ Sistema web para registrar pedidos de pacotes de seguidores, com frontend respon
 WhatsApp de destino: `+55 81 9302-8646`  
 E-mail de destino: `deividdanilo15@gmail.com`
 
+## Estrutura
+
+```text
+flowboost-pedidos/
+├── index.html
+├── assets/
+│   ├── styles.css
+│   └── app.js
+├── supabase/
+│   ├── config.toml
+│   ├── schema.sql
+│   └── functions/
+│       └── flowboost-order/
+│           └── index.ts
+├── .gitignore
+└── README.md
+```
+
 ## Arquitetura
 
-- `public/index.html`: interface do cliente.
-- `supabase/functions/flowboost-order/index.ts`: Edge Function pública para receber e validar pedidos.
-- `supabase/schema.sql`: estrutura da tabela `flowboost_orders`.
-- Supabase Postgres: guarda código, perfil, pacote, valor, status e datas.
+- `index.html`: interface principal pronta para hospedagem estática.
+- `assets/styles.css`: layout tecnológico azul, responsividade, cards e animações.
+- `assets/app.js`: seleção de pacotes, validação, WhatsApp, histórico local e integração com o backend.
+- `supabase/functions/flowboost-order/index.ts`: Edge Function que recebe, valida e grava pedidos.
+- `supabase/schema.sql`: definição da tabela `public.flowboost_orders`.
+- Supabase Postgres: persistência real de códigos, perfis, pacotes, valores, status e datas.
 
 ## Segurança
 
-- O frontend nunca envia nem conhece chaves secretas do Supabase.
-- O valor é recalculado e validado na Edge Function.
-- A tabela usa RLS e `anon`/`authenticated` não têm acesso direto.
-- A função aceita somente os 7 pacotes oficiais.
-- Links fornecidos são validados para `instagram.com`.
-- Pedidos duplicados iguais em menos de 30 segundos são bloqueados.
-- Códigos usam 12 caracteres hexadecimais aleatórios.
+- Nenhuma chave secreta do Supabase fica no frontend.
+- O preço é recalculado no servidor; o navegador não decide o valor gravado.
+- A tabela `flowboost_orders` usa RLS e não possui acesso direto para `anon` ou `authenticated`.
+- A Edge Function aceita somente os 7 pacotes oficiais.
+- Links enviados são validados para `instagram.com`.
+- Pedidos iguais repetidos em menos de 30 segundos são bloqueados.
+- Os códigos usam 12 caracteres hexadecimais aleatórios após o prefixo `FB-`.
+- A solicitação só aparece como gerada no frontend depois da confirmação do backend.
 
-## Supabase usado
+## Supabase
 
-Projeto: `fqisewatypluagngmgka`
+Projeto conectado: `fqisewatypluagngmgka`
 
-Edge Function:
+Edge Function ativa:
 
 `https://fqisewatypluagngmgka.supabase.co/functions/v1/flowboost-order`
 
@@ -46,12 +67,16 @@ Tabela:
 
 `public.flowboost_orders`
 
-## E-mail
+A configuração em `supabase/config.toml` mantém a função pública (`verify_jwt = false`) para que o formulário possa ser usado sem login. A própria função faz a validação dos dados e usa credenciais do ambiente do Supabase apenas no servidor.
 
-A Edge Function encaminha os dados do pedido para `deividdanilo15@gmail.com` usando FormSubmit e registra o resultado em `email_status`. Na primeira utilização do FormSubmit, o endereço de destino pode precisar confirmar a ativação do serviço.
+## WhatsApp e e-mail
 
-## Publicação do frontend
+Depois que o Supabase confirma o pedido, o frontend libera o envio do resumo para o WhatsApp `+55 81 9302-8646`.
 
-O diretório `public/` pode ser publicado diretamente no GitHub Pages, Cloudflare Pages ou outro host estático. O backend permanece no Supabase.
+A Edge Function também tenta encaminhar uma cópia do pedido para `deividdanilo15@gmail.com` via FormSubmit e registra o resultado em `email_status`. Na primeira utilização, o endereço de destino pode precisar confirmar a ativação do serviço.
+
+## Hospedagem
+
+Como o `index.html` está na raiz, o frontend pode ser publicado por GitHub Pages ou outro host estático sem processo de build. O backend continua hospedado no Supabase.
 
 Use o sistema apenas para perfis próprios ou autorizados e de forma compatível com as regras da plataforma utilizada.
