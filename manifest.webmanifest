@@ -8,10 +8,10 @@
   "theme_color": "#07111f",
   "icons": [
     {
-      "src": "assets/flowboost-logo.png",
-      "sizes": "256x256",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "src": "assets/flowboost-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }
